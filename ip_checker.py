@@ -32,6 +32,8 @@ ip_pool = set()
 with open(config['shadowsocks_log_path'] + "/shadowsocks.log") as f:
     for line in f:
         list_of_content = str(line).split(' ')
+		print list_of_content[0] + list_of_content[1]
+		print type(list_of_content[0] + list_of_content[1])
         content_datetime = datetime.datetime.strptime(list_of_content[0] + list_of_content[1], '%Y-%m-%d%H:%M:%S')
         if list_of_content[2] == 'INFO' and list_of_content[-2] == 'from' and \
                 (datetime.datetime.now() - content_datetime).days <= 1:
