@@ -7,7 +7,7 @@ from config import config
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
-gic = pygeoip.GeoIP('GeoLiteCity.dat')
+gic = pygeoip.GeoIP(config['current_path'] + '/GeoLiteCity.dat')
 
 
 def get_country_and_city(ip_address):
