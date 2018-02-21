@@ -30,15 +30,17 @@ with open(config['current_path'] + "/ip_white_list.csv") as f:
 # check all the ip
 ip_pool = set()
 with open(config['shadowsocks_log_path'] + "/shadowsocks.log") as f:
-    for line in f:
+    # noinspection PyTypeChecker
+    for line in reversed(f):
         list_of_content = str(line).split(' ')
         # noinspection PyBroadException
         try:
             content_datetime = datetime.datetime.strptime(list_of_content[0] + list_of_content[1], '%Y-%m-%d%H:%M:%S')
         except:
             continue
-        if list_of_content[2] == 'INFO' and list_of_content[-2] == 'from' and \
-                (datetime.datetime.now() - content_datetime).days <= 1:
+        if (datetime.datetime.now() - content_datetime).days >= 1:
+            break
+        if list_of_content[2] == 'INFO' and list_of_content[-2] == 'from':
             ip = list_of_content[-1].split(':')[0]
             ip_pool.add(ip)
 
