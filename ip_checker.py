@@ -30,8 +30,7 @@ with open(config['current_path'] + "/ip_white_list.csv") as f:
 # check all the ip
 ip_pool = set()
 with open(config['shadowsocks_log_path'] + "/shadowsocks.log") as f:
-    # noinspection PyTypeChecker
-    for line in reversed(f):
+    for line in reversed(list(f)):
         list_of_content = str(line).split(' ')
         # noinspection PyBroadException
         try:
